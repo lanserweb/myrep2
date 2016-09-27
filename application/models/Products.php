@@ -13,6 +13,7 @@ class Products extends Model {
 			$arr[$i]['id'] = $obj->id; 
 			$arr[$i]['price'] = $obj->price; 
 			$arr[$i]['oldprice'] = $obj->oldprice; 
+			$arr[$i]['manufacture'] = $obj->manufacture; 
 			$arr[$i]['showOldPrice'] = $obj->showOldPrice; 
 			$arr[$i]['image'] = $obj->image; 
 			$arr[$i]['category'] = $obj->category;

@@ -65,7 +65,7 @@
       
       <ul class="left_menu">
         <?php foreach($this->categorieslist as $category) : ?>
-        <li class="odd"><a href="categories/index/id/<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></li>
+        <li class="<?php if($category['id'] % 2 == 1) {echo 'odd';} else {echo 'even';} ?>"><a href="categories/index/id/<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></li>
         <?php endforeach; ?>
       </ul>
 
@@ -99,7 +99,7 @@
             <span class="price"><?php echo $lastproducts['price']."$"; ?></span></div>
           </div>
           <div class="bottom_prod_box"></div>
-          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
+          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a id="product-<?php echo $lastproducts['id']; ?>" class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
         </div>
       <?php endforeach; ?>
 
@@ -138,17 +138,14 @@
         <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p2.gif" alt="" border="0" /></a></div>
         <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
       </div>
+
       <div class="title_box">Manufacturers</div>
       <ul class="left_menu">
-        <li class="odd"><a href="#">Sony</a></li>
-        <li class="even"><a href="#">Samsung</a></li>
-        <li class="odd"><a href="#">Daewoo</a></li>
-        <li class="even"><a href="#">LG</a></li>
-        <li class="odd"><a href="#">Fujitsu Siemens</a></li>
-        <li class="even"><a href="#">Motorola</a></li>
-        <li class="odd"><a href="#">Phillips</a></li>
-        <li class="even"><a href="#">Beko</a></li>
+        <?php foreach ($this->manufactures as $manufacture) : ?>
+          <li class="<?php if($manufacture['id'] % 2 == 1) {echo 'odd';} else {echo 'even';} ?>"><a href="manufacture/index/brand/<?php echo $manufacture['URIname']; ?>"><?php echo $manufacture['name']; ?></a></li>
+        <?php endforeach; ?>
       </ul>
+
       <div class="banner_adds"> <a href="#"><img src="/ebuy/html/images/bann1.jpg" alt="" border="0" /></a> </div>
     </div>
     
@@ -158,7 +155,15 @@
     <div class="left_footer">  </div>
 
 
-
+<script type="text/javascript">
+  $("#product-<?php foreach ($this->lastproducts) as $item) {
+    echo $item['id'];
+  } ?>").click(function() {
+    $.ajax({
+      url:"cart/index/add";
+    });  
+  });
+</script>
 
 
 
@@ -172,3 +177,4 @@
 
 </div>
 </div>
+</html>
