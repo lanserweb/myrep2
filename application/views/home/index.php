@@ -42,20 +42,13 @@
     <div id="menu_tab">
       <div class="left_menu_corner"></div>
       <ul class="menu">
-        <li><a href="#" class="nav1"> Home</a></li>
+      <?php foreach($this->menu as $menu) : ?>
+         <li><a href="<?php echo $menu['URIname']; ?>" class="<?php echo $menu['image']; ?>"> <?php echo $menu['name']; ?></a></li>
         <li class="divider"></li>
-        <li><a href="#" class="nav2">Products</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav3">Specials</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav4">My account</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav4">Sign Up</a></li>
-        <li class="divider"></li>
-        <li><a href="#" class="nav5">Shipping</a></li>
-        <li class="divider"></li>
-        <li><a href="contact.html" class="nav6">Contact Us</a></li>
-        <li class="divider"></li>
+       
+      <?php endforeach; ?>
+
+      
         <li class="currencies">Currencies
           <select>
             <option>US Dollar</option>
@@ -66,7 +59,7 @@
       <div class="right_menu_corner"></div>
     </div>
     <!-- end of menu tab -->
-    <div class="crumb_navigation"> Navigation: <span class="current">Home</span> </div>
+   
     <div class="left_content">
       <div class="title_box">Categories</div>
       
@@ -91,97 +84,45 @@
     <!-- end of left content -->
     <div class="center_content">
       <div class="center_title_bar">Latest Products</div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/laptop.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+      <?php foreach($this->lastProducts as $lastproducts) : ?>
+        <div class="prod_box">
+          <div class="top_prod_box"></div>
+          <div class="center_prod_box">
+            <div class="product_title"><a href="products/index/id/<?php echo $lastproducts['id']; ?>">
+            <?php echo $lastproducts['name']; ?></a>
+            </div>
+            <div class="product_img"><a href="products/index/id/<?php echo $lastproducts['id']; ?>"><img src="<?php echo $lastproducts['image']; ?>" alt="" border="0" /></a></div>
+            <div class="prod_price">
+            <?php if($lastproducts['showOldPrice']=='1') : ?>
+            <span class="reduce"><?php echo $lastproducts['oldprice']."$"; ?></span> 
+          <?php endif; ?>
+            <span class="price"><?php echo $lastproducts['price']."$"; ?></span></div>
+          </div>
+          <div class="bottom_prod_box"></div>
+          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
         </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
+      <?php endforeach; ?>
+
+
+      <div class="center_title_bar">Recomended Products</div>
+      <?php foreach($this->recomendedProducts as $lastproducts) : ?>
       <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Iphone Apple</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p4.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="price">270$</span></div>
+          <div class="top_prod_box"></div>
+          <div class="center_prod_box">
+            <div class="product_title"><a href="products/index/id/<?php echo $lastproducts['id']; ?>">
+            <?php echo $lastproducts['name']; ?></a>
+            </div>
+            <div class="product_img"><a href="products/index/id/<?php echo $lastproducts['id']; ?>"><img src="<?php echo $lastproducts['image']; ?>" alt="" border="0" /></a></div>
+            <div class="prod_price">
+            <?php if($lastproducts['showOldPrice']=='1') : ?>
+            <span class="reduce"><?php echo $lastproducts['oldprice']."$"; ?></span> 
+          <?php endif; ?>
+            <span class="price"><?php echo $lastproducts['price']."$"; ?></span></div>
+          </div>
+          <div class="bottom_prod_box"></div>
+          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
         </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p5.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html//ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/laptop.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Iphone Apple</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p4.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p5.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="center_title_bar">Recommended Products</div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/laptop.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Iphone Apple</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p4.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
-          <div class="product_img"><a href="details.html"><img src="/ebuy/html/images/p5.gif" alt="" border="0" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
-      </div>
+      <?php endforeach; ?>
     </div>
     <!-- end of center content -->
     <div class="right_content">
