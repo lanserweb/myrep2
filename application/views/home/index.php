@@ -1,3 +1,5 @@
+
+<?php print_r($_SESSION['products']); ?>
 <!DOCTYPE>
 <html>
 <head>
@@ -99,7 +101,7 @@
             <span class="price"><?php echo $lastproducts['price']."$"; ?></span></div>
           </div>
           <div class="bottom_prod_box"></div>
-          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a id="product-<?php echo $lastproducts['id']; ?>" class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
+          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a id="product-<?php echo $lastproducts['id']; ?>" class="prod_details" style="width:80px;float:right;" onclick ="addToCard(<?php echo $lastproducts['id']; ?>)">Add to Card</a> </div>
         </div>
       <?php endforeach; ?>
 
@@ -120,7 +122,7 @@
             <span class="price"><?php echo $lastproducts['price']."$"; ?></span></div>
           </div>
           <div class="bottom_prod_box"></div>
-          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a class="prod_details" style="width:80px;float:right;">Add to Card</a> </div>
+          <div class="prod_details_tab"> <a  title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a class="prod_details" style="width:80px;float:right;" onclick ="addToCard(<?php echo $lastproducts['id']; ?>)">Add to Card</a> </div>
         </div>
       <?php endforeach; ?>
     </div>
@@ -128,8 +130,8 @@
     <div class="right_content">
       <div class="shopping_cart">
         <div class="cart_title">Shopping cart</div>
-        <div class="cart_details"> 3 items <br />
-          <span class="border_cart"></span> Total: <span class="price">350$</span> </div>
+        <div class="cart_details"> <a id="cart"><?php echo CartModel::showCountInCart()." items"; ?></a> <br />
+          <span class="border_cart"></span> Total: <span id="totalPrice" class="price"><?php echo CartModel::showTotalPrice()."$"; ?></span> </div>
         <div class="cart_icon"><a href="#" title="header=[Checkout] body=[&nbsp;] fade=[on]"><img src="/ebuy/html/images/shoppingcart.png" alt="" width="48" height="48" border="0" /></a></div>
       </div>
       <div class="title_box">What’s new</div>
@@ -155,16 +157,43 @@
     <div class="left_footer">  </div>
 
 
-<script type="text/javascript">
-  $("#product-<?php foreach ($this->lastproducts) as $item) {
-    echo $item['id'];
-  } ?>").click(function() {
-    $.ajax({
-      url:"cart/index/add";
-    });  
-  });
-</script>
 
+<script>
+  function getXmlHttp(){
+    var xmlhttp;
+      try {
+        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        try {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (E) {
+          xmlhttp = false;
+        }
+      }
+      if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+        xmlhttp = new XMLHttpRequest();
+      }
+      return xmlhttp;
+  }
+
+  function addToCard(getid) {
+    req = getXmlHttp();
+    req.open("POST","cart/add",true);
+    req.onreadystatechange = function () {
+      if (req.readyState == 4)
+        if (req.status == 200) {
+          var cart = document.getElementById("cart");
+          var total = document.getElementById("totalPrice");
+          var splits = req.responseText.split(":");
+          cart.innerHTML = splits[0]+" items";
+          total.innerHTML = splits[1]+"$";
+        }
+    } 
+    var id = getid;
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    req.send("id="+id);
+  }   
+</script>
 
 
 
